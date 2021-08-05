@@ -1,5 +1,6 @@
 let states = []
 let state = new Image
+let stateIndex = -1
 
 const setupContext = (context, color, width) => {
     context.strokeStyle = color
@@ -34,16 +35,30 @@ const draw = (e, context, pen, penWidth, penColor) => {
     pen.y = e.offsetY
 }
 
-const toPrev = (canvas, context) => {
-    states.pop()
+const undo = (canvas, context) => {
+    if (stateIndex == -1) return
     context.clearRect(0, 0, canvas.width, canvas.height)
-    if (states.length <= 0) return
-    state.src = states[states.length - 1]
+    if (--stateIndex == -1) return
+    state.src = states[stateIndex]
     state.onload = () => context.drawImage(state, 0, 0)
+}
+
+const redo = (canvas, context) => {
+    if (stateIndex + 1 >= states.length) return
+    context.clearRect(0, 0, canvas.width, canvas.height)
+    state.src = states[++stateIndex]
+    state.onload = () => context.drawImage(state, 0, 0)
+}
+
+const clean = (canvas, context) => {
+    context.clearRect(0, 0, canvas.width, canvas.height)
+    states.push(canvas.toDataURL())
+    stateIndex++
 }
 
 const penNotDown = (canvas, pen) => {
     if (!pen.down) return
+    states.splice(++stateIndex)
     states.push(canvas.toDataURL())
     pen.down = false
 }
@@ -55,7 +70,8 @@ window.addEventListener('load', () => {
     const penWidth = document.getElementsByName('penWidth')[0]
     const saver = document.getElementById('saver')
     const cleaner = document.getElementById('cleaner')
-    const prev = document.getElementById('prev')
+    const undoElem = document.getElementById('undo')
+    const redoElem = document.getElementById('redo')
 
     setupContext(context, penColor.value, penWidth.value)
     let pen = {
@@ -66,13 +82,12 @@ window.addEventListener('load', () => {
     state.width = canvas.width
     state.height = canvas.height
 
-    const clean = () => context.clearRect(0, 0, canvas.width, canvas.height)
-
     saver.addEventListener('click', () => saveDrawing(canvas))
-    cleaner.addEventListener('click', clean)
+    undoElem.addEventListener('click', () => undo(canvas, context))
+    redoElem.addEventListener('click', () => redo(canvas, context))
+    cleaner.addEventListener('click', () => clean(canvas, context))
     canvas.addEventListener('mousedown', (e) => penDown(e, pen))
     canvas.addEventListener('mousemove', (e) => draw(e, context, pen, penWidth.value, penColor.value))
     canvas.addEventListener('mouseup', () => penNotDown(canvas, pen))
     canvas.addEventListener('mouseout', () => penNotDown(canvas, pen))
-    prev.addEventListener('click', () => toPrev(canvas, context))
 })

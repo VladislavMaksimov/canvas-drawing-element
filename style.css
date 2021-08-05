@@ -29,6 +29,15 @@ input[type="range"] {
     cursor: pointer;
 }
 
+.stateChanger {
+    color: white;
+    background-color: rgb(189, 189, 189);
+}
+
+.stateChanger:hover {
+    background-color: rgb(161, 161, 161);
+}
+
 #dashboard {
     display: flex;
     align-items: center;
@@ -50,15 +59,6 @@ input[type="range"] {
 
 #saver:hover {
     background-color: rgb(149, 189, 70);
-}
-
-#prev {
-    color: white;
-    background-color: rgb(189, 189, 189);
-}
-
-#prev:hover {
-    background-color: rgb(161, 161, 161);
 }
 
 #cleaner {
