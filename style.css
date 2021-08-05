@@ -1,5 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    border-radius: 5px;
+    border: none;
+    padding: 8px 16px 8px 16px;
+    cursor: pointer;
+}
+
+input[type="color"] {
+    height: 30px;
+    width: 50px;
+    cursor: pointer;
+}
+
+input[type="range"] {
+    cursor: pointer;
+}
+
+#dashboard {
+    display: flex;
+    align-items: center;
+    margin: 25px 0 15px 0;
+}
+
+#dashboard > *:not(:nth-last-child(1)) {
+    margin-right: 10px;
+}
+
 #canvas {
     border: 1px solid black;
+}
+
+#saver {
+    color: white;
+    background-color: rgb(172, 209, 98);
+}
+
+#saver:hover {
+    background-color: rgb(149, 189, 70);
+}
+
+#cleaner {
+    color: white;
+    background-color: rgb(189, 189, 189);
+}
+
+#cleaner:hover {
+    background-color: rgb(161, 161, 161);
 }
 
 #downloader {
