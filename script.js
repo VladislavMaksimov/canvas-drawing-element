@@ -1,3 +1,6 @@
+let states = []
+let state = new Image
+
 const setupContext = (context, color, width) => {
     context.strokeStyle = color
     context.lineWidth = width
@@ -19,7 +22,6 @@ const penDown = (e, pen) => {
 }
 
 const draw = (e, context, pen, penWidth, penColor) => {
-    console.log(pen)
     if (!pen.down) return
     context.lineWidth = penWidth
     context.strokeStyle = penColor
@@ -32,6 +34,20 @@ const draw = (e, context, pen, penWidth, penColor) => {
     pen.y = e.offsetY
 }
 
+const toPrev = (canvas, context) => {
+    states.pop()
+    context.clearRect(0, 0, canvas.width, canvas.height)
+    if (states.length <= 0) return
+    state.src = states[states.length - 1]
+    state.onload = () => context.drawImage(state, 0, 0)
+}
+
+const penNotDown = (canvas, pen) => {
+    if (!pen.down) return
+    states.push(canvas.toDataURL())
+    pen.down = false
+}
+
 window.addEventListener('load', () => {
     const canvas = document.getElementById('canvas')
     const context = canvas.getContext('2d')
@@ -39,6 +55,7 @@ window.addEventListener('load', () => {
     const penWidth = document.getElementsByName('penWidth')[0]
     const saver = document.getElementById('saver')
     const cleaner = document.getElementById('cleaner')
+    const prev = document.getElementById('prev')
 
     setupContext(context, penColor.value, penWidth.value)
     let pen = {
@@ -46,14 +63,16 @@ window.addEventListener('load', () => {
         y: 0,
         down: false
     }
+    state.width = canvas.width
+    state.height = canvas.height
 
-    const penNotDown = () => pen.down = false
     const clean = () => context.clearRect(0, 0, canvas.width, canvas.height)
 
     saver.addEventListener('click', () => saveDrawing(canvas))
     cleaner.addEventListener('click', clean)
     canvas.addEventListener('mousedown', (e) => penDown(e, pen))
     canvas.addEventListener('mousemove', (e) => draw(e, context, pen, penWidth.value, penColor.value))
-    canvas.addEventListener('mouseup', penNotDown)
-    canvas.addEventListener('mouseout', penNotDown)
+    canvas.addEventListener('mouseup', () => penNotDown(canvas, pen))
+    canvas.addEventListener('mouseout', () => penNotDown(canvas, pen))
+    prev.addEventListener('click', () => toPrev(canvas, context))
 })

@@ -52,13 +52,22 @@ input[type="range"] {
     background-color: rgb(149, 189, 70);
 }
 
-#cleaner {
+#prev {
     color: white;
     background-color: rgb(189, 189, 189);
 }
 
-#cleaner:hover {
+#prev:hover {
     background-color: rgb(161, 161, 161);
+}
+
+#cleaner {
+    color: white;
+    background-color: rgb(206, 108, 108);
+}
+
+#cleaner:hover {
+    background-color: rgb(196, 81, 81);
 }
 
 #downloader {
