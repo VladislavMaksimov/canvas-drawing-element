@@ -52,8 +52,8 @@ const redo = (canvas, context) => {
 
 const clean = (canvas, context) => {
     context.clearRect(0, 0, canvas.width, canvas.height)
+    states.splice(++stateIndex)
     states.push(canvas.toDataURL())
-    stateIndex++
 }
 
 const penNotDown = (canvas, pen) => {
