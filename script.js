@@ -50,7 +50,7 @@ const redo = (canvas, context) => {
     state.onload = () => context.drawImage(state, 0, 0)
 }
 
-const clean = (canvas, context) => {
+const clear = (canvas, context) => {
     context.clearRect(0, 0, canvas.width, canvas.height)
     states.splice(++stateIndex)
     states.push(canvas.toDataURL())
@@ -85,7 +85,7 @@ window.addEventListener('load', () => {
     saver.addEventListener('click', () => saveDrawing(canvas))
     undoElem.addEventListener('click', () => undo(canvas, context))
     redoElem.addEventListener('click', () => redo(canvas, context))
-    cleaner.addEventListener('click', () => clean(canvas, context))
+    cleaner.addEventListener('click', () => clear(canvas, context))
     canvas.addEventListener('mousedown', (e) => penDown(e, pen))
     canvas.addEventListener('mousemove', (e) => draw(e, context, pen, penWidth.value, penColor.value))
     canvas.addEventListener('mouseup', () => penNotDown(canvas, pen))
