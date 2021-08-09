@@ -4,7 +4,7 @@ My first experience with Canvas element. Based on the Udemy [small course](https
 
 ## Description
 
-This is the small app that I made when I started learning the canvas HTML element. To create the app I used HTML, CSS, and JS without any frameworks, libraries, and preprocessors. It is [published](https://vladislavmaksimov.github.io/canvas-drawing-element/) on Github Pages.  
+This is the small app that I made when I started learning the canvas HTML element. To create the app I used HTML, CSS, and JS without any frameworks, libraries, and preprocessors. It is [published](https://vladislavmaksimov.github.io/canvas-drawing-element/) on Github Pages. **Mobile phones are not supported.** 
 
 The only page of my application has a simple drawing element. You can create your masterpieces with it using a computer mouse, аs I did.
 
