@@ -14,8 +14,16 @@ The only page of my application has a simple drawing element. You can create you
 
 There are a default color picker and range input that sets the size of the line you can draw. With **Undo** and **Redo** buttons, you can undo and redo changes you made on the canvas. The **Clear** button removes everything that is now on the canvas.  
 
-Also, you can save your drawing with the **Save** button. All drawings are being saved in png format with a transparent background like my creation below.
+Also, you can save your drawing with the **Save** button. All drawings are being saved in png format with a transparent background like the creations below.
 
 <p align="center">
   <img width="70%" src="illustrations/saved_drawing.png"/>
+</p>
+
+<p align="center">
+  <img width="70%" src="illustrations/saved_drawing_2.png"/>
+</p>
+
+<p align="center">
+  <img width="70%" src="illustrations/saved_drawing_3.png"/>
 </p>
